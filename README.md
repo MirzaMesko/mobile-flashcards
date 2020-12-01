@@ -2,6 +2,8 @@
 
 This a simple mobile app that allows you to study collections of flashcards. The app will allow users to create different categories of flashcards called "decks", add flashcards to those decks, then take quizzes on those decks.
 
+It is a learning project on Udacity.com  
+
 ## Project Setup
 
 

@@ -1,14 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import  Constants  from 'expo-constants';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import AppContainer from './AppContainer';
+import { orange } from './utils/colors';
+import reducer from './reducer';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'; 
+import {  setLocalNotification, clearLocalNotification } from './utils/api';
 
-export default function App() {
+function FlashcardsStatusBar ({ backgroundColor, ...props}) {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
     </View>
-  );
+  )
+}
+
+export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+  render () {
+    return (
+      <Provider store={createStore(reducer)}>
+        <View style={{ flex: 1 }}>
+        <FlashcardsStatusBar  backgroundColor={orange} barStyle='light-content'/>
+        <AppContainer />
+      </View>
+      </Provider>
+      
+    );
+  }
+  
 }
 
 const styles = StyleSheet.create({
